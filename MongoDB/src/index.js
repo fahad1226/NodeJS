@@ -8,14 +8,25 @@ app.use(express.json())
 
 
 // user creation endpoints
-app.post('/users', (req,res) => {
+app.post('/users', async (req,res) => {
 	const user = new User(req.body)
-	user.save().then(() => {
+	//sync await based
+	try {
+		await user.save()
+		await res.status(200).send(user)
+	} catch(e) {
+		res.status(400).send("somethif went wrong " + e)
+	}
+
+
+
+	//promise based
+	/*user.save().then(() => {
 		res.send(user)
 	}).catch(err => {
 		console.log(err);
 		res.status(400).send(err)
-	}) 
+	}) */
 });
 
 

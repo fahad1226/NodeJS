@@ -16,7 +16,7 @@ const Task = mongoose.model('Task', {
 	},
 	completed: {
 		type: Boolean,
-		deafult: false
+		default: false
 	}
 })
 
